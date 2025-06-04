@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="city-title" >
+    <h2>{{ city }}</h2>
+    <a>Current Temperature</a>
+    <h3>{{ hourly[0].temp }}°C</h3>
+</div>
+
+<div class="hour-container">
+{% for hour in hourly %}
+<div class="hourly">
+    <a>{{(loop.index0 + cur_time) % 24}}:00</a>
+    <br>
+    <img src="http://openweathermap.org/img/wn/{{hour.weather[0]['icon']}}@2x.png" alt="weather icon" width="40px" height="40px">
+    <a>{{hour.temp}}°C</a>
+    
+</div>
+{% endfor %}
+</div>
+
+<div class="daily-container">
+    <table id="daily-table">
+        <tr>
+            <th>Day</th>
+            <th>Weather</th>
+            <th>Temperature</th>
+            <th>Minimum Temperature</th>
+            <th>Maximum Temperature</th>
+        </tr>
+        {% for day in daily %}
+        <tr>
+            <td>{{ days[(day_index + loop.index0) % 7]}}</td>
+            <td><img src="http://openweathermap.org/img/wn/{{day.weather[0]['icon']}}@2x.png" alt="weather icon" width="40px" height="40px"></td>
+            <td>{{day.temp.day}}°C</td>
+            <td>{{day.temp.min}}°C</td>
+            <td>{{day.temp.max}}°</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock %}

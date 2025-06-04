@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{%block head%}
+{%endblock%}
+
+{%block body%}
+<div class="top">
+    <div class="logo">
+        <a>CLIMAFY</a>
+    </div>
+</div>
+
+<div class="search_bar">
+    <form method="POST">
+        <input type="text" name="city" id="city" placeholder="Search City">
+        <input type="submit" value="ADD">
+    </form>
+</div>
+
+<div class="container">
+    {%for weather in weathers%}
+    <div class="weather-card">
+        <div class="city"><a href="{{ url_for('city_details', city_id=weather.city_id) }}">{{ weather.city }}</a></div>
+        <div class="weather-info">
+            <div>
+                <p>{{ weather.temp }}°C</p>
+                <p>(feels like {{ weather.feels_like }}°C)</p>
+                <p>{{ weather.weather }}</p>
+            </div>
+            <div width="50%">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="weather icon" width="100px">
+            </div>
+        </div>
+        <form action="/delete/{{ weather.city_id }}" method="POST">
+            <button type="submit" class="delete">Delete</button>
+        </form>
+    </div>
+    {%endfor%}
+</div>
+
+{%endblock%}

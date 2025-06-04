@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="city-title" >
+        <h2>Kuala Lumpur</h2>
+        <h3>Temperature</h3>
+    </div>
+    
+    <h3>Next 10 hours forecast</h3>
+    <div class="hour-container" id="hour-container">
+    </div>
+
+    <script>
+        for (let x = 0; x < 11; x++) {
+            var board = document.createElement('div');
+            board.className = "hourly";
+            board.textContent = `Hour ${x + 1}`; // Optional: Add label
+            document.getElementById('hour-container').appendChild(board);
+        }
+    </script>
+
+    <div class="daily-container" id="daily-container"></div>
+
+    <script>
+        // Simulated weather data for 7 days
+        const sampleData = [
+            { day: 'Sunday', temp: 30, condition: 'Sunny', icon: '01d' },
+            { day: 'Monday', temp: 28, condition: 'Cloudy', icon: '03d' },
+            { day: 'Tuesday', temp: 25, condition: 'Rainy', icon: '09d' },
+            { day: 'Wednesday', temp: 27, condition: 'Partly Cloudy', icon: '02d' },
+            { day: 'Thursday', temp: 31, condition: 'Sunny', icon: '01d' },
+            { day: 'Friday', temp: 26, condition: 'Thunderstorm', icon: '11d' },
+            { day: 'Saturday', temp: 29, condition: 'Clear', icon: '01n' },
+        ];
+    
+        for (let i = 0; i < sampleData.length; i++) {
+            const data = sampleData[i];
+    
+            // Create the daily forecast div
+            const board = document.createElement('div');
+            board.className = "daily";
+    
+            // Set the inner HTML with realistic data
+            board.innerHTML = `
+                <h4>${data.day}</h4>
+                <img src="http://openweathermap.org/img/wn/${data.icon}@2x.png" alt="${data.condition}" width="50px" height="50px">
+                <p>${data.temp}°C</p>
+                <p>${data.condition}</p>
+            `;
+    
+            document.getElementById('daily-container').appendChild(board);
+        }
+    </script>
+</body>
+</html>
